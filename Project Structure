@@ -1,0 +1,5 @@
+nginx-load-balancer/
+├── Dockerfile
+├── docker-compose.yml
+├── nginx.conf
+├── README.md
