@@ -1,0 +1,17 @@
+upstream backend {
+    ip_hash;
+    server 192.168.1.XX max_fails=3 fail_timeout=30s;
+    server 192.168.1.XX max_fails=3 fail_timeout=30s;
+}
+
+server {
+    listen 443 ssl;
+    ssl_certificate /etc/nginx/certs/ssl.crt;
+    ssl_certificate_key /etc/nginx/certs/ssl.key;
+
+    location / {
+        proxy_pass http://backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
